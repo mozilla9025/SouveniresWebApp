@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Souvenires</title>
+    <!--<h:outputStylesheet library="css" name="styles.css"/>-->
+</h:head>
+<h:body>
+    <h:form>
+        <h:inputText value="#{souvenirBean.tempSouvenir.souvenirName}" required="true"/>
+        <h:inputText value="#{souvenirBean.tempSouvenir.price}" required="true"/>
+        <h:selectOneMenu value="#{souvenirBean.tempSouvenir.vendor.vendor.id}">
+            <f:selectItems value="#{vendorBean.vendors}"
+                           var="vendor"
+                           itemValue="#{vendor.id}"
+                           itemLabel="#{vendor.vendorName}"
+            />
+        </h:selectOneMenu>
+        <h:commandButton action="#{souvenirBean.add}" value="Add souvenir"/>
+    </h:form>
+
+
+    <h:dataTable value="#{souvenirBean.souvenires}" var="souvenir">
+        <h:column>
+            <f:facet name="header">ID</f:facet>
+            #{souvenir.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            #{souvenir.souvenirName}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Vendor</f:facet>
+            #{souvenir.vendor.vendor.vendorName}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Price</f:facet>
+            #{souvenir.price}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Date</f:facet>
+            #{souvenir.date}
+        </h:column>
+    </h:dataTable>
+
+    <h:form>
+
+        <h:commandButton
+                value="Vendors"
+                action="vendors"/>
+    </h:form>
+</h:body>
+
+</html>

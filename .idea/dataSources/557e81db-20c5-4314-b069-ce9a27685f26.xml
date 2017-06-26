@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="souvenires_db@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
+    <root id="1"/>
+    <schema id="2" parent="1" name="souvenires_db">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="formaldb"/>
+    <schema id="4" parent="1" name="information_schema"/>
+    <schema id="5" parent="1" name="mysql"/>
+    <schema id="6" parent="1" name="pbdatabase"/>
+    <schema id="7" parent="1" name="performance_schema"/>
+    <schema id="8" parent="1" name="souvenires"/>
+    <schema id="9" parent="1" name="test"/>
+    <schema id="10" parent="1" name="watch_shop"/>
+    <table id="11" parent="2" name="souvenir"/>
+    <table id="12" parent="2" name="souvenirvendor"/>
+    <table id="13" parent="2" name="vendor"/>
+    <column id="14" parent="11" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="15" parent="11" name="DATE">
+      <Position>2</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="16" parent="11" name="SOUVENIRNAME">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="17" parent="11" name="PRICE">
+      <Position>4</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="18" parent="11" name="VENDOR_ID">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="19" parent="11" name="FK_SOUVENIR_VENDOR_ID">
+      <ColNames>VENDOR_ID</ColNames>
+    </index>
+    <key id="20" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="21" parent="11" name="FK_SOUVENIR_VENDOR_ID">
+      <ColNames>VENDOR_ID</ColNames>
+      <RefSchemaName>souvenires_db</RefSchemaName>
+      <RefTableName>vendor</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="22" parent="12" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="23" parent="12" name="VENDOR_ID">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="24" parent="12" name="FK_SOUVENIRVENDOR_VENDOR_ID">
+      <ColNames>VENDOR_ID</ColNames>
+    </index>
+    <key id="25" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="26" parent="12" name="FK_SOUVENIRVENDOR_VENDOR_ID">
+      <ColNames>VENDOR_ID</ColNames>
+      <RefSchemaName>souvenires_db</RefSchemaName>
+      <RefTableName>vendor</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="27" parent="13" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="28" parent="13" name="VENDORNAME">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="29" parent="13" name="COUNTRY">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="30" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
