@@ -5,61 +5,51 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-    <title>Vendors</title>
-    <!--<h:outputStylesheet library="css" name="styles.css"/>-->
-</h:head>
 <h:body>
-
+    <f:view>
+        <h:outputLabel value="Choose vendor:"/>
+    </f:view>
     <h:form>
-        <h:inputText value="#{vendorBean.tempVendor.vendorName}" required="true"/>
-        <h:selectOneMenu value="#{vendorBean.countryId}">
+        <h:selectOneMenu value="#{souvenirBean.countryId}">
             <f:selectItems value="#{countryBean.countries}"
                            var="country"
+                           itemValue="#{country.id}"
                            itemLabel="#{country.name}"
-                           itemValue="#{country.id}"/>
-        </h:selectOneMenu>
-        <h:commandButton action="#{vendorBean.addVendor}" value="Add vendor"/>
-    </h:form>
-
-    <h:form>
-        <h:selectOneMenu value="#{vendorBean.vendorId}">
-            <f:selectItems value="#{vendorBean.vendors}"
-                           var="vendor"
-                           itemValue="#{vendor.id}"
-                           itemLabel="#{vendor.vendor.vendorName}"
             />
         </h:selectOneMenu>
-        <h:commandButton action="#{vendorBean.deleteVendor}" value="Delete vendor"/>
+        <h:commandButton action="#{souvenirBean.doGetSouveniresOfCountry}" value="Get souvenires"/>
     </h:form>
 
-    <h:dataTable value="#{vendorBean.vendors}" var="vendor">
+    <h:dataTable value="#{souvenirBean.souveniresOfCountry}" var="souvenir">
         <h:column>
             <f:facet name="header">ID</f:facet>
-            #{vendor.id}
+            #{souvenir.id}
         </h:column>
         <h:column>
             <f:facet name="header">Name</f:facet>
-            #{vendor.vendor.vendorName}
+            #{souvenir.souvenir.souvenirName}
         </h:column>
         <h:column>
-            <f:facet name="header">Name</f:facet>
-            #{vendor.country.id}
+            <f:facet name="header">Price</f:facet>
+            #{souvenir.souvenir.price}
         </h:column>
         <h:column>
-            <f:facet name="header">Country</f:facet>
-            #{vendor.country.name}
+            <f:facet name="header">Date</f:facet>
+            #{souvenir.souvenir.date}
         </h:column>
     </h:dataTable>
 
-
     <h:form>
+
         <h:commandButton
                 value="Countries"
                 action="countries"/>
         <h:commandButton
                 value="Souvenires"
-                action="index"/>
+                action="souvenires"/>
+        <h:commandButton
+                value="Vendors"
+                action="vendors"/>
         <h:commandButton
                 value="Queries"
                 action="queries"/>

@@ -6,7 +6,9 @@
         <jta-data-source>jdbc/souvenires</jta-data-source>
         <class>tables.Vendor</class>
         <class>tables.Souvenir</class>
-        <class>tables.SouvenirVendor</class>
+        <class>tables.Country</class>
+        <class>tables.SouveniresOfVendor</class>
+        <class>tables.VendorCountry</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
         <properties>

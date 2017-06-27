@@ -5,10 +5,16 @@ import java.util.Collection;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Vendor.findAll", query = "SELECT v FROM Vendor v"),
-//        @NamedQuery(name = "Vendor.vendorsByPrice",
-//                query = "SELECT v FROM Vendor v INNER JOIN Souvenir s " +
-//                        "ON Vendor.id = v.id GROUP BY v.id HAVING avg(s.price) < :price")
+        @NamedQuery(name = "Vendor.findVendorsByPrice",
+                query = "SELECT v FROM SouveniresOfVendor v HAVING max(v.souvenir.price)<:price"),
+        @NamedQuery(name = "Vendor.findVendorsOfSouvenirByYear",
+                query = "SELECT sv FROM SouveniresOfVendor sv " +
+                        "WHERE sv.souvenir.id = :souvenirId and sv.souvenir.date = :year"),
+        @NamedQuery(name = "Vendor.findAll",
+                query = "SELECT v FROM VendorCountry v"),
+        @NamedQuery(name = "Vendor.deleteVendor",
+                query = "DELETE FROM SouveniresOfVendor v WHERE v.vendor.id = :vendorId")
+
 })
 public class Vendor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,25 +40,25 @@ public class Vendor {
         this.vendorName = vendorName;
     }
 
-    @Basic
-    private String country;
+    @OneToOne(mappedBy = "vendor", optional = false)
+    private VendorCountry country;
 
-    public String getCountry() {
+    public VendorCountry getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
-        country = country;
+    public void setCountry(VendorCountry country) {
+        this.country = country;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendor")
-    private Collection<SouvenirVendor> souvenires;
+    @OneToMany(mappedBy = "vendor")
+    private Collection<SouveniresOfVendor> souvenires;
 
-    public Collection<SouvenirVendor> getSouvenires() {
+    public Collection<SouveniresOfVendor> getSouvenires() {
         return souvenires;
     }
 
-    public void setSouvenires(Collection<SouvenirVendor> souvenires) {
+    public void setSouvenires(Collection<SouveniresOfVendor> souvenires) {
         this.souvenires = souvenires;
     }
 }

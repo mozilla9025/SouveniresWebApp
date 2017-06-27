@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Vendors</title>
+    <!--<h:outputStylesheet library="css" name="styles.css"/>-->
+</h:head>
+<h:body>
+
+<h:form>
+    <h:inputText value="#{vendorBean.souvenirPrice}" required="true"/>
+
+    <h:commandButton action="#{vendorBean.findVendorsByPriceOfSouvenires}" value="Get vendors by price"/>
+</h:form>
+
+<h:dataTable value="#{vendorBean.vendorListByPrice}" var="vendor">
+    <h:column>
+        <f:facet name="header">ID</f:facet>
+        #{vendor.id}
+    </h:column>
+    <h:column>
+        <f:facet name="header">Name</f:facet>
+        #{vendor.vendor.vendorName}
+    </h:column>
+    <h:column>
+        <f:facet name="header">Name</f:facet>
+        #{vendor.vendor.country.country.name}
+    </h:column>
+    <h:column>
+        <f:facet name="header">Country</f:facet>
+        #{vendor.vendor.country.country.name}
+    </h:column>
+</h:dataTable>
+
+
+<h:form>
+    <h:commandButton
+            value="Countries"
+            action="countries"/>
+    <h:commandButton
+            value="Souvenires"
+            action="index"/>
+    <h:commandButton
+            value="Vendors"
+            action="vendors"/>
+    <h:commandButton
+            value="Queries"
+            action="queries"/>
+</h:form>
+</h:body>
+</html>

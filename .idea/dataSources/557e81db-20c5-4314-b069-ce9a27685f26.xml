@@ -14,85 +14,137 @@
     <schema id="8" parent="1" name="souvenires"/>
     <schema id="9" parent="1" name="test"/>
     <schema id="10" parent="1" name="watch_shop"/>
-    <table id="11" parent="2" name="souvenir"/>
-    <table id="12" parent="2" name="souvenirvendor"/>
-    <table id="13" parent="2" name="vendor"/>
-    <column id="14" parent="11" name="ID">
+    <table id="11" parent="2" name="country"/>
+    <table id="12" parent="2" name="souvenir"/>
+    <table id="13" parent="2" name="souveniresofvendor"/>
+    <table id="14" parent="2" name="vendor"/>
+    <table id="15" parent="2" name="vendorcountry"/>
+    <column id="16" parent="11" name="ID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="15" parent="11" name="DATE">
+    <column id="17" parent="11" name="NAME">
       <Position>2</Position>
-      <DataType>date|0</DataType>
-    </column>
-    <column id="16" parent="11" name="SOUVENIRNAME">
-      <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="17" parent="11" name="PRICE">
-      <Position>4</Position>
+    <key id="18" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="19" parent="12" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="20" parent="12" name="DATE">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="21" parent="12" name="PRICE">
+      <Position>3</Position>
       <DataType>double|0</DataType>
     </column>
-    <column id="18" parent="11" name="VENDOR_ID">
-      <Position>5</Position>
-      <DataType>int(11)|0</DataType>
-    </column>
-    <index id="19" parent="11" name="FK_SOUVENIR_VENDOR_ID">
-      <ColNames>VENDOR_ID</ColNames>
-    </index>
-    <key id="20" parent="11" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>ID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="21" parent="11" name="FK_SOUVENIR_VENDOR_ID">
-      <ColNames>VENDOR_ID</ColNames>
-      <RefSchemaName>souvenires_db</RefSchemaName>
-      <RefTableName>vendor</RefTableName>
-      <RefColNames>ID</RefColNames>
-    </foreign-key>
-    <column id="22" parent="12" name="ID">
-      <Position>1</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="23" parent="12" name="VENDOR_ID">
-      <Position>2</Position>
-      <DataType>int(11)|0</DataType>
-    </column>
-    <index id="24" parent="12" name="FK_SOUVENIRVENDOR_VENDOR_ID">
-      <ColNames>VENDOR_ID</ColNames>
-    </index>
-    <key id="25" parent="12" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>ID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="26" parent="12" name="FK_SOUVENIRVENDOR_VENDOR_ID">
-      <ColNames>VENDOR_ID</ColNames>
-      <RefSchemaName>souvenires_db</RefSchemaName>
-      <RefTableName>vendor</RefTableName>
-      <RefColNames>ID</RefColNames>
-    </foreign-key>
-    <column id="27" parent="13" name="ID">
-      <Position>1</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="28" parent="13" name="VENDORNAME">
-      <Position>2</Position>
+    <column id="22" parent="12" name="SOUVENIRNAME">
+      <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="29" parent="13" name="COUNTRY">
+    <key id="23" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="24" parent="13" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="25" parent="13" name="VENDOR_ID">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="26" parent="13" name="SOUVENIR_ID">
       <Position>3</Position>
-      <DataType>varchar(255)|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>int(11)|0</DataType>
     </column>
-    <key id="30" parent="13" name="PRIMARY">
+    <index id="27" parent="13" name="FK_SOUVENIRESOFVENDOR_SOUVENIR_ID">
+      <ColNames>SOUVENIR_ID</ColNames>
+    </index>
+    <index id="28" parent="13" name="FK_SOUVENIRESOFVENDOR_VENDOR_ID">
+      <ColNames>VENDOR_ID</ColNames>
+    </index>
+    <key id="29" parent="13" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
+    <foreign-key id="30" parent="13" name="FK_SOUVENIRESOFVENDOR_VENDOR_ID">
+      <ColNames>VENDOR_ID</ColNames>
+      <RefSchemaName>souvenires_db</RefSchemaName>
+      <RefTableName>vendor</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <foreign-key id="31" parent="13" name="FK_SOUVENIRESOFVENDOR_SOUVENIR_ID">
+      <ColNames>SOUVENIR_ID</ColNames>
+      <RefSchemaName>souvenires_db</RefSchemaName>
+      <RefTableName>souvenir</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="32" parent="14" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="33" parent="14" name="VENDORNAME">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="34" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="35" parent="15" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="36" parent="15" name="COUNTRY_ID">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="37" parent="15" name="VENDOR_ID">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="38" parent="15" name="FK_VENDORCOUNTRY_COUNTRY_ID">
+      <ColNames>COUNTRY_ID</ColNames>
+    </index>
+    <index id="39" parent="15" name="FK_VENDORCOUNTRY_VENDOR_ID">
+      <ColNames>VENDOR_ID</ColNames>
+    </index>
+    <key id="40" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="41" parent="15" name="FK_VENDORCOUNTRY_COUNTRY_ID">
+      <ColNames>COUNTRY_ID</ColNames>
+      <RefSchemaName>souvenires_db</RefSchemaName>
+      <RefTableName>country</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <foreign-key id="42" parent="15" name="FK_VENDORCOUNTRY_VENDOR_ID">
+      <ColNames>VENDOR_ID</ColNames>
+      <RefSchemaName>souvenires_db</RefSchemaName>
+      <RefTableName>vendor</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>

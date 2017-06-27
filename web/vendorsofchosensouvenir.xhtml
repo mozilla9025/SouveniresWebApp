@@ -11,29 +11,22 @@
 </h:head>
 <h:body>
 
+    <f:view>
+        <h:outputLabel value="Choose souvenir:"/>
+    </f:view>
     <h:form>
-        <h:inputText value="#{vendorBean.tempVendor.vendorName}" required="true"/>
-        <h:selectOneMenu value="#{vendorBean.countryId}">
-            <f:selectItems value="#{countryBean.countries}"
-                           var="country"
-                           itemLabel="#{country.name}"
-                           itemValue="#{country.id}"/>
-        </h:selectOneMenu>
-        <h:commandButton action="#{vendorBean.addVendor}" value="Add vendor"/>
-    </h:form>
-
-    <h:form>
-        <h:selectOneMenu value="#{vendorBean.vendorId}">
-            <f:selectItems value="#{vendorBean.vendors}"
-                           var="vendor"
-                           itemValue="#{vendor.id}"
-                           itemLabel="#{vendor.vendor.vendorName}"
+        <h:selectOneMenu value="#{vendorBean.souvenirId}">
+            <f:selectItems value="#{souvenirBean.allSouvenires}"
+                           var="souvenir"
+                           itemValue="#{souvenir.souvenir.id}"
+                           itemLabel="#{souvenir.souvenir.souvenirName}"
             />
         </h:selectOneMenu>
-        <h:commandButton action="#{vendorBean.deleteVendor}" value="Delete vendor"/>
+        <h:inputText value="#{vendorBean.year}"/>
+        <h:commandButton action="#{vendorBean.findVendorsOfChosenSouvenirByYear}" value="Get vendors"/>
     </h:form>
 
-    <h:dataTable value="#{vendorBean.vendors}" var="vendor">
+    <h:dataTable value="#{vendorBean.vendorList}" var="vendor">
         <h:column>
             <f:facet name="header">ID</f:facet>
             #{vendor.id}
@@ -43,15 +36,10 @@
             #{vendor.vendor.vendorName}
         </h:column>
         <h:column>
-            <f:facet name="header">Name</f:facet>
-            #{vendor.country.id}
-        </h:column>
-        <h:column>
             <f:facet name="header">Country</f:facet>
-            #{vendor.country.name}
+            #{vendor.vendor.country.country.name}
         </h:column>
     </h:dataTable>
-
 
     <h:form>
         <h:commandButton
@@ -60,6 +48,10 @@
         <h:commandButton
                 value="Souvenires"
                 action="index"/>
+        <h:commandButton
+                value="Vendors"
+                action="vendors"/>
+
         <h:commandButton
                 value="Queries"
                 action="queries"/>

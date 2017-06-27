@@ -13,45 +13,51 @@
     <h:form>
         <h:inputText value="#{souvenirBean.tempSouvenir.souvenirName}" required="true"/>
         <h:inputText value="#{souvenirBean.tempSouvenir.price}" required="true"/>
-        <h:selectOneMenu value="#{souvenirBean.tempSouvenir.vendor.vendor.id}">
+        <h:inputText value="#{souvenirBean.tempSouvenir.date}" required="true"/>
+        <h:selectOneMenu value="#{souvenirBean.vendorId}">
             <f:selectItems value="#{vendorBean.vendors}"
                            var="vendor"
                            itemValue="#{vendor.id}"
-                           itemLabel="#{vendor.vendorName}"
+                           itemLabel="#{vendor.vendor.vendorName}"
             />
         </h:selectOneMenu>
         <h:commandButton action="#{souvenirBean.add}" value="Add souvenir"/>
     </h:form>
 
-
-    <h:dataTable value="#{souvenirBean.souvenires}" var="souvenir">
+    <h:dataTable value="#{souvenirBean.allSouvenires}" var="souvenir">
         <h:column>
             <f:facet name="header">ID</f:facet>
             #{souvenir.id}
         </h:column>
         <h:column>
             <f:facet name="header">Name</f:facet>
-            #{souvenir.souvenirName}
+            #{souvenir.souvenir.souvenirName}
         </h:column>
         <h:column>
             <f:facet name="header">Vendor</f:facet>
-            #{souvenir.vendor.vendor.vendorName}
+            #{souvenir.vendor.vendorName}
         </h:column>
         <h:column>
             <f:facet name="header">Price</f:facet>
-            #{souvenir.price}
+            #{souvenir.souvenir.price}
         </h:column>
         <h:column>
             <f:facet name="header">Date</f:facet>
-            #{souvenir.date}
+            #{souvenir.souvenir.date}
         </h:column>
     </h:dataTable>
 
     <h:form>
+        <h:commandButton
+                value="Countries"
+                action="countries"/>
 
         <h:commandButton
                 value="Vendors"
                 action="vendors"/>
+        <h:commandButton
+                value="Queries"
+                action="queries"/>
     </h:form>
 </h:body>
 

@@ -6,21 +6,20 @@ import java.util.Date;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Souvenir.findAll",
-                query = "SELECT s FROM Souvenir s"),
+                query = "SELECT s FROM SouveniresOfVendor s"),
         @NamedQuery(name = "Souvenir.souveniresByVendor",
-                query = "SELECT s FROM Souvenir s WHERE s.vendor.id = " +
-                        "(SELECT v.id FROM Vendor v WHERE v.vendorName = :vendorName)"),
+                query = "SELECT s FROM SouveniresOfVendor s WHERE s.vendor.id = :vendorId"),
         @NamedQuery(name = "Souvenir.souveniresByCountry",
-                query = "SELECT s FROM Souvenir s " +
-                        "WHERE s.vendor.vendor.country = :countryName")})
+                query = "SELECT s FROM SouveniresOfVendor s " +
+                        "WHERE s.vendor.country.country.id = :countryId")})
 public class Souvenir {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer id;
 
     @Basic
-    private Date date;
+    private Integer date;
 
     @Basic
     private Double price;
@@ -36,11 +35,11 @@ public class Souvenir {
         this.id = id;
     }
 
-    public Date getDate() {
+    public Integer getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Integer date) {
         this.date = date;
     }
 
@@ -60,14 +59,14 @@ public class Souvenir {
         this.souvenirName = name;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    private SouvenirVendor vendor;
+    @OneToOne(mappedBy = "souvenir", optional = false)
+    private SouveniresOfVendor vendor;
 
-    public SouvenirVendor getVendor() {
+    public SouveniresOfVendor getVendor() {
         return vendor;
     }
 
-    public void setVendor(SouvenirVendor vendor) {
+    public void setVendor(SouveniresOfVendor vendor) {
         this.vendor = vendor;
     }
 }
